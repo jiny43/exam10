@@ -14,6 +14,7 @@ cursor: pointer;
 } 
 </style> 
 </head> 
+
 <body> 
 <button id="move-button">move!</button> 
 <div id="root"> 
@@ -38,9 +39,29 @@ cursor: pointer;
 const first = document.getElementById('first'); 
 const second = document.getElementById('second'); 
 const moveButton = document.getElementById('move-button'); 
-// Q.1 식별자 moveButton을 누르면, first의 첫번째 자식을 second의 마지막 자식으로 이동시키는 코드를 작성해주세요. // Q.2 #first 의 ul 태그의 자식들이(li태그)가 모두 second로 이동했다면, 
-// Q.3 모든 #root 태그의 모든 자식을 삭제 하여 사실상 백지화를 시키세요. 
-// Q.4 1초뒤에 "hello!" 라는 문구가 나타나게 하세요. 
-</script> 
-</body> 
-</html>
+// Q.1 식별자 moveButton을 누르면, first의 첫번째 자식을 second의 마지막 자식으로 이동시키는 코드를 작성해주세요. 
+moveButton.addEventListener('click', function() {
+  const firstUl = first.querySelector('ul');
+  const secondUl = second.querySelector('ul');
+  const firstFirstChild = firstUl.firstChild;
+
+  // first의 첫번째 자식이 존재하면
+  if (firstFirstChild) {
+    // first의 첫번째 자식을 second의 마지막 자식으로 이동
+    secondUl.appendChild(firstFirstChild);
+  }
+  // Q.2 #first 의 ul 태그의 자식들이(li태그)가 모두 second로 이동했다면, 
+if (firstUl.children.length === 0) {
+    // 콘솔에 "모두 이동했습니다." 출력
+    console.log("모두 이동했습니다.");
+  }
+  // Q.3 모든 #root 태그의 모든 자식을 삭제 하여 사실상 백지화를 시키세요.
+  if (firstUl.children.length === 0 && secondUl.children.length === 6) {
+    root.innerHTML = "";
+  }
+  // Q.4 1초뒤에 "hello!" 라는 문구가 나타나게 하세요.
+setTimeout(function() {
+  console.log("hello!");
+}, 1000);
+});
+
